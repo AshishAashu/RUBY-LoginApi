@@ -51,6 +51,7 @@ class ApiusersController < ApplicationController
                     apiuser.password = params[:password]
                     apiuser.course = Course.find(params[:course])
                     apiuser.apikey = apikey
+                    apiuser.youtube_id = params[:youtube_id]
                     if apiuser.save
                         res[:status] = "OK"
                         res[:message] = "User Created."
@@ -99,6 +100,7 @@ class ApiusersController < ApplicationController
                 userinfo[:password] = apiuser.password
                 userinfo[:course_name] = apiuser.course.course_name
                 userinfo[:apiuserkey] = apiuser.apiuserkey
+                userinfo[:youtube_id] = apiuser.youtube_id
                 res[:userinfo] = userinfo
             else
                 res[:status] = "fail"
@@ -214,6 +216,11 @@ class ApiusersController < ApplicationController
         key
     end
 
+    #####################################################################
+    #                                                                   #
+    #        Function To addcourse on api call                          #
+    #                                                                   #
+    #####################################################################
 
     def addcourse
         res = Hash.new
@@ -230,6 +237,12 @@ class ApiusersController < ApplicationController
         render json: res;
     end
 
+
+    #####################################################################
+    #                                                                   #
+    #        Function To get "courses" on api call of user.              #
+    #                                                                   #
+    #####################################################################
 
     def getcourses
         coursearr = Array.new;
@@ -254,6 +267,38 @@ class ApiusersController < ApplicationController
         else
             res[:status] = "Fail"
             res[:message] = "ApiKey Missing."
+        end
+        render json: res;
+    end
+
+
+    #####################################################################
+    #                                                                   #
+    #        Function To get "userdetail" on request.                   #
+    #                                                                   #
+    #####################################################################
+
+    def getapiuserrestrictdata
+        res = Hash.new
+        apiuserkey = request.headers["apiuserkey"]
+        if apiuserkey != nil
+            apiuser = Apiuser.where(apiuserkey: apiuserkey ).take
+            if apiuser!=nil
+                res[:status] = "OK"
+                userinfo =Hash.new
+                userinfo[:name] = apiuser.name
+                userinfo[:email] = apiuser.email
+                userinfo[:password] = apiuser.password
+                userinfo[:course_name] = apiuser.course.course_name
+                userinfo[:youtube_id] = apiuser.youtube_id
+                res[:userinfo] = userinfo
+            else
+                res[:status] = "fail"
+                res[:msg] = "User Not Found."
+            end    
+        else
+            res[:status] = "Fail"
+            res[:message] = "ApiUserKey Missing."
         end
         render json: res;
     end
