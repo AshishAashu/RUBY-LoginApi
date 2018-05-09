@@ -1,0 +1,14 @@
+<h1>Register User</h1>
+
+<%= form_tag :action => 'create' do %>
+<p><label for = "User Name">Title</label>:
+
+<%= text_field 'users', 'name' %></p>
+<p><label for = "User Address">Price</label>:
+
+<%= text_field 'users', 'address' %></p>
+
+<%= submit_tag "Register" %>
+
+<% end %>
+<%= link_to 'User Login', {:action => 'login'} %>

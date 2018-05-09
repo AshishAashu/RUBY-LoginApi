@@ -1,0 +1,12 @@
+<h1>Login User</h1>
+
+<%= form_tag :action => 'login_submit' do %>
+<p><label for = "User Name">Title</label>:
+
+<%= text_field 'users', 'name' %></p>
+
+<%= submit_tag "Login" %>
+
+<% end %>
+<%= link_to 'New User', {:action => 'register'} %>
+<%= link_to 'List User', {:action => 'lists'} %>
