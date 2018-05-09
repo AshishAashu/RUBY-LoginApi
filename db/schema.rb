@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508073106) do
+ActiveRecord::Schema.define(version: 20180509070132) do
 
   create_table "apiusers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180508073106) do
     t.string "apiuserkey"
     t.string "exists"
     t.bigint "course_id"
+    t.string "youtube_id"
     t.index ["course_id"], name: "index_apiusers_on_course_id"
   end
 
