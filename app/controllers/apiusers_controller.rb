@@ -144,6 +144,7 @@ class ApiusersController < ApplicationController
                 userinfo[:email] = apiuser.email
                 userinfo[:password] = apiuser.password
                 userinfo[:course_name] = apiuser.course.course_name
+                userinfo[:youtube_id] = apiuser.youtube_id
                 userinfo[:apiuserkey] = apiuser.apiuserkey
                 res[:userinfo] = userinfo
             else
