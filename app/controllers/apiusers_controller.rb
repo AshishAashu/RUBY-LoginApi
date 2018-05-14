@@ -55,6 +55,7 @@ class ApiusersController < ApplicationController
                     if apiuser.save
                         res[:status] = "OK"
                         res[:message] = "User Created."
+                        res[:userinfo] = apiuser
                     else
                         res[:status] = "Fail"
                         res[:message] = "Something went wrong."
