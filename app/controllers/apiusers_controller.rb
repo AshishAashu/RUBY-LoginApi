@@ -211,7 +211,7 @@ class ApiusersController < ApplicationController
     
     def getLoggedinKey
         key = ""
-        chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+        chars = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789"
         25.times do
             key << chars[rand(chars.size)]
         end
