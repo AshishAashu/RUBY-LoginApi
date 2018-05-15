@@ -293,12 +293,15 @@ class ApiusersController < ApplicationController
             if user!=nil
                 @course = Course.all
                 res[:status] ="OK"
+                res[:total] = @course.count
                 @course.each do |cs|
                     c = Hash.new
                     c[:course_id] = cs.id
                     c[:course_name] = cs.course_name
+                    c[:total] = 0
                     c[:course_users] = Hash.new
                     c[:course_users][:users] = cs.apiusers
+                    c[:total] = cs.apiusers.count
                     # p cs.apiusers
                     coursearr.push(c)
                 end
