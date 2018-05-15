@@ -259,6 +259,9 @@ class ApiusersController < ApplicationController
                     c = Hash.new
                     c[:course_id] = cs.id
                     c[:course_name] = cs.course_name
+                    # c[:course_users] = Hash.new
+                    # c[:course_users][:users] = cs.apiusers
+                    # p cs.apiusers
                     coursearr.push(c)
                 end
                 res[:courses] = coursearr
@@ -273,6 +276,43 @@ class ApiusersController < ApplicationController
         render json: res;
     end
 
+
+    #####################################################################
+    #                                                                   #
+    #        Function To get "courses with belongs user"                #
+    #        on api call of user.                                       #
+    #                                                                   #
+    #####################################################################
+
+    def getcourseswithusers
+        coursearr = Array.new;
+        res = Hash.new
+        apikey = request.headers["apikey"]
+        if apikey != nil
+            user = User.where(apikey: apikey ).take
+            if user!=nil
+                @course = Course.all
+                res[:status] ="OK"
+                @course.each do |cs|
+                    c = Hash.new
+                    c[:course_id] = cs.id
+                    c[:course_name] = cs.course_name
+                    c[:course_users] = Hash.new
+                    c[:course_users][:users] = cs.apiusers
+                    # p cs.apiusers
+                    coursearr.push(c)
+                end
+                res[:courses] = coursearr
+            else
+                res[:status] = "fail"
+                res[:message] = "No such user find."
+            end    
+        else
+            res[:status] = "Fail"
+            res[:message] = "ApiKey Missing."
+        end
+        render json: res;
+    end
 
     #####################################################################
     #                                                                   #
