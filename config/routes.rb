@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   post 'apiusers/addcourse'
   get 'apiusers/getcourses'
   get 'apiusers/getapiuserrestrictdata'
+  get 'apiusers/getcourseswithusers'
 end
