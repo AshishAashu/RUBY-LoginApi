@@ -1,3 +1,3 @@
 class Course < ApplicationRecord
-    has_many :apiusers, class_name: "Apiusers"
+    has_many :apiusers, class_name: "Apiuser"
 end
