@@ -1,11 +1,25 @@
 class UsersController < ApplicationController
+    skip_before_action :verify_authenticity_token  
     def lists
         @users = User.all
     end
     def login
+        res = Hash.new
+        user = User.where(name: params[:email],address: params[:password] ).take
+        if user!=nil
+            res[:status] = "OK"
+            userinfo =Hash.new
+            userinfo[:email] = user.name
+            userinfo[:apikey] = user.apikey
+            res[:userinfo] = userinfo
+        else
+            res[:status] = "fail"
+            res[:msg] = "User Not Found."
+        end    
+        render json: res;
     end
-    def register
-    end
+
+
     def login_submit
     end
     def index
