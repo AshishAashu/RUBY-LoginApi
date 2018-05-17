@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "users/create"
   get "users/new"
   get "users/index"
-  get "users/login"
+  post "users/login"
   get "users/register"
   post "users/login_submit"
 
