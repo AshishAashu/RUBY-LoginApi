@@ -17,8 +17,14 @@ class ApiusersController < ApplicationController
             if !user.empty?
                 res[:status] = "OK"
                 @apiusers = Apiuser.where(apikey: apikey)
-                res[:total] = @apiusers.count
-                res[:users]= @apiusers
+                res[:users] = @apiusers
+                # res[:total] = @apiusers.count
+                # res[:users]= Array.new
+                # @apiusers.each do |apiuser|
+                #     user = Hash.new
+                #     user = apiuser
+                #     res[:users].push(user) 
+                # end
             else
                 res[:status] = "Fail"
                 res[:message] = "No such api exists"
