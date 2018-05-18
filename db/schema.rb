@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509070132) do
+ActiveRecord::Schema.define(version: 20180518061141) do
 
   create_table "apiusers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -23,7 +23,9 @@ ActiveRecord::Schema.define(version: 20180509070132) do
     t.string "exists"
     t.bigint "course_id"
     t.string "youtube_id"
+    t.bigint "user_id"
     t.index ["course_id"], name: "index_apiusers_on_course_id"
+    t.index ["user_id"], name: "index_apiusers_on_user_id"
   end
 
   create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -41,4 +43,5 @@ ActiveRecord::Schema.define(version: 20180509070132) do
   end
 
   add_foreign_key "apiusers", "courses"
+  add_foreign_key "apiusers", "users"
 end

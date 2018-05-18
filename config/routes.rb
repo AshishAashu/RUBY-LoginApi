@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "users", to: "users#index"
   get "users/lists"
   post "users/create"
+  get 'users/:id'=>'users#show'
   get "users/new"
   get "users/index"
   post "users/login"
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
 
 
   get 'apiusers/apiuserlist'
+  # get 'apiusers/:id' => 'apiusers#show'
   post 'apiusers/apilogin'
   post 'apiusers/apiregister'
   put 'apiusers/apiupdate'

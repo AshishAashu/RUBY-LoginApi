@@ -3,6 +3,13 @@ class UsersController < ApplicationController
     def lists
         @users = User.all
     end
+
+    def show
+        @user = User.find(params[:id])
+        respond_to do |format|
+            format.json { render json:@user}
+        end
+    end
     def login
         res = Hash.new
         user = User.where(name: params[:email],address: params[:password] ).take
